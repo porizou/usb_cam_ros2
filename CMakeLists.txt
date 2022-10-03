@@ -12,8 +12,6 @@ find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(OpenCV REQUIRED COMPONENTS core highgui videoio)
 find_package(rclcpp_components REQUIRED)
-find_package(image_transport REQUIRED)
-
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -29,9 +27,12 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED
   src/usb_cam.cpp
+  src/image_subscriber.cpp
 )
-ament_target_dependencies(${PROJECT_NAME} rclcpp OpenCV cv_bridge sensor_msgs rclcpp_components image_transport)
+ament_target_dependencies(${PROJECT_NAME} rclcpp OpenCV cv_bridge sensor_msgs rclcpp_components)
 rclcpp_components_register_nodes(${PROJECT_NAME} "usb_cam_node::ImagePublisher")
+rclcpp_components_register_nodes(${PROJECT_NAME} "usb_cam_node::ImageSubscriber")
+
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 # Call ament build system
 ament_package()

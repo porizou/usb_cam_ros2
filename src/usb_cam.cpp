@@ -2,9 +2,6 @@
 #include <sensor_msgs/msg/image.hpp>
 #include <opencv2/opencv.hpp>
 #include "cv_bridge/cv_bridge.h"
-#include "image_transport/image_transport.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include <opencv2/imgproc.hpp>
 
 namespace usb_cam_node
 {
@@ -42,7 +39,6 @@ ImagePublisher::~ImagePublisher()
 
 void ImagePublisher::publishImage()
 {
-  RCLCPP_ERROR(this->get_logger(), "publish ");
   sensor_msgs::msg::Image ros_img;
   cv_bridge::CvImage cv_img;
   cv_img.encoding = "bgr8";
